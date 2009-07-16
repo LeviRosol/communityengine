@@ -3,8 +3,9 @@ class GroupsController < BaseController
   cache_sweeper :taggable_sweeper, :only => [:activate, :update, :destroy]  
   
   uses_tiny_mce(:options => AppConfig.default_mce_options.merge({:editor_selector => "rich_text_editor"}), 
-    :only => [:new, :create, :update, :edit, :welcome_about])
-  uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
+    :only => [:new, :create, :update, :edit])
+
+  before_filter :admin_required, :except => [:index, :show]
 
   
   def index
@@ -61,7 +62,6 @@ class GroupsController < BaseController
     @metro_areas = MetroArea.find(:all)
     @states = State.find(:all)
     
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @group }
@@ -122,6 +122,7 @@ class GroupsController < BaseController
         format.xml  { render :xml => @group.errors, :status => :unprocessable_entity }
       end
     end
+   
   end
 
   # PUT /groups/1

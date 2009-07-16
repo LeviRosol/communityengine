@@ -5,6 +5,8 @@ class Group < ActiveRecord::Base
   validates_presence_of     :name
   validates_presence_of     :metro_area, :if => Proc.new { |group| group.state }
 
+  validates_format_of       :name, :with => /^[\sA-Za-z0-9_-]+$/
+
   belongs_to :metro_area
   belongs_to :state
   belongs_to :country
@@ -152,4 +154,5 @@ class Group < ActiveRecord::Base
     end
   end
 
+  
 end

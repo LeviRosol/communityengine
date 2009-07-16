@@ -1,0 +1,3 @@
+[submodule "vendors/plugins/community_engine"]
+	path = vendors/plugins/community_engine
+	url = git://github.com/LeviRosol/communityengine.git

@@ -7,3 +7,11 @@ moderator:
 member:
   id: 3 
   name: member
+owner:
+  id: 4
+  name: Owner
+  type: GroupRole
+fan:
+  id: 5
+  name: Fan
+  type: GroupRole

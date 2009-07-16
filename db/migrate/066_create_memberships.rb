@@ -1,4 +1,4 @@
-wcclass CreateMemberships < ActiveRecord::Migration
+class CreateMemberships < ActiveRecord::Migration
   def self.up
     create_table :memberships do |t|
       t.integer :user_id

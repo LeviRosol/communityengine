@@ -4,6 +4,8 @@
       =:manager_controls.l
     %p
       = link_to :edit_group.l, edit_group_path(@group)
+      %br
+      = link_to :group_roster.l, roster_group_path(@group)
 
 #profile_details.box.hentry
   %h3
@@ -34,4 +36,4 @@
       - if @group.tags.any?
         %li.tags= :my_tags.l+": #{@group.tags.collect{|t| link_to t.name, tag_url(t.name) }.join(", ")}"
       - if @group.metro_area
-        %li.geo= link_to( @group.full_location, groups_path(:metro_area_id => @group.metro_area_id, :state_id => @group.state_id, :country_id => @group.country_id ) )
+        %li.geo= link_to( @group.full_location, groups_path(:metro_area_id => @group.metro_area_id, :state_id => @group.state_id, :country_id => @group.country_id ) ) 

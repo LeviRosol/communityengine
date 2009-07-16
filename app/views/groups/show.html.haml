@@ -23,8 +23,8 @@
     -#= link_to "&raquo; #{:invite_a_member.l :site => AppConfig.community_name}", invite_group_path(@group) if @is_group_owner
     = link_to "&raquo; #{:view_all_my_member_requests.l} (#{@pending_memberships_count})", pending_group_memberships_path(@group) if @is_group_owner
     %br
-    - @accepted_memberships.each do |user|
-      =render :partial => "users/sidebar_user", :locals => {:user => user}
+    -#@accepted_memberships.each do |user|
+      =#render :partial => "users/sidebar_user", :locals => {:user => user}
     -if @accepted_memberships.size > 4
       %h6.all
         =link_to :see_all.l, accepted_group_memberships_path(@group)
