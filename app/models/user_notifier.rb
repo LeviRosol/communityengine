@@ -6,6 +6,13 @@ class UserNotifier < ActionMailer::Base
   include BaseHelper
   ActionMailer::Base.default_url_options[:host] = APP_URL.sub('http://', '')
 
+  def membership_request(membership)
+    setup_email(membership.group.owner)
+    @subject     += "#{membership.user.login} would like to be a fan of #{membership.group.name}!."
+    @body[:url]  = pending_group_memberships_url(membership.group)
+    @body[:requester] = membership.group.owner
+  end
+
   def signup_invitation(email, user, message)
     setup_sender_info
     @recipients  = "#{email}"
