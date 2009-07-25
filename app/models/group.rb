@@ -13,7 +13,7 @@ class Group < ActiveRecord::Base
   belongs_to :avatar, :class_name => "Groupphoto", :foreign_key => "avatar_id"
 
   has_many :accepted_memberships, :class_name => "Membership", :conditions => ['membership_status_id = ?', 2]
-  has_many :pending_memberships, :class_name => "Membership", :conditions => ['initiator = ? AND membership_status_id = ?', false, 1]
+  has_many :pending_memberships, :class_name => "Membership", :conditions => ['initiator = ? AND membership_status_id = ?', true, 1]
   has_many :memberships_initiated_by_me, :class_name => "Membership", :foreign_key => "group_id", :conditions => ['initiator = ?', false], :dependent => :destroy
   has_many :memberships_not_initiated_by_me, :class_name => "Membership", :foreign_key => "group_id", :conditions => ['initiator = ?', true], :dependent => :destroy
   has_many :occurances_as_member, :class_name => "Membership", :foreign_key => "member_id", :dependent => :destroy
@@ -49,7 +49,7 @@ class Group < ActiveRecord::Base
           @group_role = GroupRole.find_by_name(role_name)
 
           memberships.each do |member|
-            results << member if member.is_in_group_role?(@group_role) == in_role
+            results << member if member.is_in_group_role?(@group_role) == in_role && member.membership_status_id == 2
           end
         end
       end
